@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Anysets</title>
+    <title>八邻域巡线 | Anysets</title>
     <meta name="author" content="Anysets" />
     <meta name="description" content="Anysets" />
     <meta name="keywords" content="" />
@@ -42,7 +42,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -110,40 +112,11 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/images/background.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>Anysets</h1>
-                <h3></h3>
-                <h5>Anysets</h5>
-            </div>
-        </span>
+            <div class="article">
+    <div>
+        <h1>八邻域巡线</h1>
     </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2024/05/22/%E5%85%AB%E9%82%BB%E5%9F%9F%E5%B7%A1%E7%BA%BF/">
-        <h2 class="post-title">八邻域巡线</h2>
-    </a>
-    <div class="category-and-date">
-        
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -153,10 +126,9 @@
         
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>原先的八邻域已经写好了，最近在写右圆环时又遇到了八邻域，但是逻辑似乎有些混乱，在此再次记录下八邻域的思路。</p>
+    
+    <div class="content" v-pre>
+        <p>原先的八邻域已经写好了，最近在写右圆环时又遇到了八邻域，但是逻辑似乎有些混乱，在此再次记录下八邻域的思路。</p>
 <p>八邻域需要在一个固定起点处以一个顺时针或者逆时针的顺序对周围的点进行扫描。在我的程序中，如果在扫描的过程中发现一个白点突变为黑点，则说明找到了新的黑线。此时记录下这个黑点的位置，并将其作为下一个起点，如此往复，直到爬出完整的边界。</p>
 <p>以下是在爬取赛道时的八邻域代码：</p>
 <pre><code class="//八邻域rewrite">//记录左边界的数据
@@ -258,77 +230,13 @@ void neighborSearch()
 出问题的原因也找出来了，我将一部分的点标记为了152，而我在找八邻域时的条件为从255到0，这使程序在找八邻域时如果遇到了被我标记为152的点，程序将一直在那里循环，将标记解除后恢复了正常。
 </code></pre>
 
-            
-        </div>
     </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/05/22/%E5%85%AB%E9%82%BB%E5%9F%9F%E5%B7%A1%E7%BA%BF/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/05/19/%E8%BF%99%E6%8A%8A%E6%98%AF%E7%9C%9F%E7%9A%84hello-world%E4%BA%86/">
-        <h2 class="post-title">这把是真的hello world了</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/5/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>第一个博客，上线了anysets.tech，然后好像也没啥了，就这样吧。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/05/19/%E8%BF%99%E6%8A%8A%E6%98%AF%E7%9C%9F%E7%9A%84hello-world%E4%BA%86/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
     
-    <span class="current">1</span>
     
     
     
     
-</div>
-
-    </div>
     
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
-        </div>
-        <div class="name">Anysets</div>
-        <div class="description">
-            <p>One has to eventually grow up,spending a lifetime to taste love and pain.</p>
-
-        </div>
-        
-        
-    </div>
-</div>
-
-    </div>
     
 </div>
 
@@ -360,6 +268,12 @@ void neighborSearch()
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
