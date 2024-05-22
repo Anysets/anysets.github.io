@@ -131,104 +131,11 @@
         <p>原先的八邻域已经写好了，最近在写右圆环时又遇到了八邻域，但是逻辑似乎有些混乱，在此再次记录下八邻域的思路。</p>
 <p>八邻域需要在一个固定起点处以一个顺时针或者逆时针的顺序对周围的点进行扫描。在我的程序中，如果在扫描的过程中发现一个白点突变为黑点，则说明找到了新的黑线。此时记录下这个黑点的位置，并将其作为下一个起点，如此往复，直到爬出完整的边界。</p>
 <p>以下是在爬取赛道时的八邻域代码：</p>
-<pre><code class="//八邻域rewrite">//记录左边界的数据
-int32_t border_location_left[border_length][2];  //记录边界位置
-int32_t border_count_left = 0;
-int32_t growth_direction_left[border_length];  //记录生长方向
-int32_t growth_count_left = 0;
-//记录右边界的数据
-int32_t border_location_right[border_length][2];  //记录边界位置
-int32_t border_count_right = 0;
-int32_t growth_direction_right[border_length];  //记录生长方向
-int32_t growth_count_right = 0;
-void neighborSearch()
-&#123;
-    memset(border_location_left, 0, sizeof(border_location_left));
-    memset(border_location_right, 0, sizeof(border_location_right));
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">//记录左边界的数据</span><br><span class="line">int32_t border_location_left[border_length][2];  //记录边界位置</span><br><span class="line">int32_t border_count_left = 0;</span><br><span class="line">int32_t growth_direction_left[border_length];  //记录生长方向</span><br><span class="line">int32_t growth_count_left = 0;</span><br><span class="line">//记录右边界的数据</span><br><span class="line">int32_t border_location_right[border_length][2];  //记录边界位置</span><br><span class="line">int32_t border_count_right = 0;</span><br><span class="line">int32_t growth_direction_right[border_length];  //记录生长方向</span><br><span class="line">int32_t growth_count_right = 0;</span><br><span class="line">void neighborSearch()</span><br><span class="line">&#123;</span><br><span class="line">    memset(border_location_left, 0, sizeof(border_location_left));</span><br><span class="line">    memset(border_location_right, 0, sizeof(border_location_right));</span><br><span class="line"></span><br><span class="line">    int32_t neighbor_left[9][2] = &#123;&#123;-1, 1&#125;, &#123;-1, 0&#125;, &#123;-1, -1&#125;, &#123;0, -1&#125;, &#123;1, -1&#125;, &#123;1, 0&#125;, &#123;1, 1&#125;, &#123;0, 1&#125;, &#123;-1, 1&#125;&#125;;</span><br><span class="line">    int32_t neighbor_right[9][2] = &#123;&#123;-1, -1&#125;, &#123;-1, 0&#125;, &#123;-1, 1&#125;, &#123;0, 1&#125;, &#123;1, 1&#125;, &#123;1, 0&#125;, &#123;1, -1&#125;, &#123;0, -1&#125;, &#123;-1, -1&#125;&#125;;</span><br><span class="line">    border_count_left = 1;</span><br><span class="line">    growth_count_left = 1;</span><br><span class="line">    border_count_right = 1;</span><br><span class="line">    growth_count_right = 1;</span><br><span class="line">    //把起点加进去</span><br><span class="line">    border_location_left[0][0] = start_point_l[0];</span><br><span class="line">    border_location_left[0][1] = start_point_l[1];</span><br><span class="line">    border_location_right[0][0] = start_point_r[0];</span><br><span class="line">    border_location_right[0][1] = start_point_r[1];</span><br><span class="line">    for (int j = 0; j &lt; border_length-1; j++)</span><br><span class="line">    &#123;</span><br><span class="line">		//左边界部分</span><br><span class="line">        /*</span><br><span class="line">            [2]  [1]  [0/8]</span><br><span class="line"></span><br><span class="line">            [3]  [ ]  [7]</span><br><span class="line"></span><br><span class="line">            [4]  [5]  [6]</span><br><span class="line">        */</span><br><span class="line">        // printf(&quot;%d\n&quot;, j);</span><br><span class="line">        for (int i = 0; i &lt; 8; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]] == 255 &amp;&amp; bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]] == 0)</span><br><span class="line">            &#123;</span><br><span class="line">                // printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]]);</span><br><span class="line">                // printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]]);</span><br><span class="line">                growth_direction_left[growth_count_left] = i;</span><br><span class="line">				growth_count_left++;</span><br><span class="line">                start_point_l[0] = start_point_l[0] + neighbor_left[i+1][0];</span><br><span class="line">                start_point_l[1] = start_point_l[1] + neighbor_left[i+1][1];</span><br><span class="line">                border_location_left[border_count_left][0] = start_point_l[0];</span><br><span class="line">                border_location_left[border_count_left][1] = start_point_l[1];</span><br><span class="line">                border_count_left++;</span><br><span class="line">				// printf(&quot;New Left Start Point: %d, %d\n&quot;, start_point_l[0], start_point_l[1]);</span><br><span class="line">                // printf(&quot;finished\n&quot;);</span><br><span class="line">				// printf(&quot;%d\n&quot;, j);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //右边界部分</span><br><span class="line">        /*</span><br><span class="line">            [0/8]  [1]  [2]</span><br><span class="line"></span><br><span class="line">            [7]  [ ]  [3]</span><br><span class="line"></span><br><span class="line">            [6]  [5]  [4]</span><br><span class="line">        */</span><br><span class="line">        for (int i = 0; i &lt; 8; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (bin_image[start_point_r[0] + neighbor_right[i][0]][start_point_r[1] + neighbor_right[i][1]] == 255  &amp;&amp; (bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] == 0 || bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] == 151))</span><br><span class="line">            &#123;</span><br><span class="line">                growth_direction_right[growth_count_right] = i;</span><br><span class="line">				growth_count_right++;</span><br><span class="line"></span><br><span class="line">                border_location_right[border_count_right][0] = start_point_r[0] + neighbor_right[i+1][0];</span><br><span class="line">                border_location_right[border_count_right][1] = start_point_r[1] + neighbor_right[i+1][1];</span><br><span class="line">				// bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] = 151;</span><br><span class="line">                start_point_r[0] = start_point_r[0] + neighbor_right[i+1][0];</span><br><span class="line">                start_point_r[1] = start_point_r[1] + neighbor_right[i+1][1];</span><br><span class="line">				border_count_right++;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //当两线交汇时停止搜线</span><br><span class="line">        if ((j != 0 &amp;&amp; j != border_length-1) &amp;&amp; </span><br><span class="line">        ((border_location_left[j][0] == border_location_right[j][0] &amp;&amp; border_location_left[j][1] == border_location_right[j][1])</span><br><span class="line">        || (border_location_left[j+1][0] == border_location_right[j-1][0] &amp;&amp; border_location_left[j+1][1] == border_location_right[j-1][1])</span><br><span class="line">        || (border_location_left[j-1][0] == border_location_right[j+1][0] &amp;&amp; border_location_left[j-1][1] == border_location_right[j+1][1])))</span><br><span class="line">        &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    int32_t neighbor_left[9][2] = &#123;&#123;-1, 1&#125;, &#123;-1, 0&#125;, &#123;-1, -1&#125;, &#123;0, -1&#125;, &#123;1, -1&#125;, &#123;1, 0&#125;, &#123;1, 1&#125;, &#123;0, 1&#125;, &#123;-1, 1&#125;&#125;;
-    int32_t neighbor_right[9][2] = &#123;&#123;-1, -1&#125;, &#123;-1, 0&#125;, &#123;-1, 1&#125;, &#123;0, 1&#125;, &#123;1, 1&#125;, &#123;1, 0&#125;, &#123;1, -1&#125;, &#123;0, -1&#125;, &#123;-1, -1&#125;&#125;;
-    border_count_left = 1;
-    growth_count_left = 1;
-    border_count_right = 1;
-    growth_count_right = 1;
-    //把起点加进去
-    border_location_left[0][0] = start_point_l[0];
-    border_location_left[0][1] = start_point_l[1];
-    border_location_right[0][0] = start_point_r[0];
-    border_location_right[0][1] = start_point_r[1];
-    for (int j = 0; j &lt; border_length-1; j++)
-    &#123;
-        //左边界部分
-        /*
-            [2]  [1]  [0/8]
-
-            [3]  [ ]  [7]
-
-            [4]  [5]  [6]
-        */
-        // printf(&quot;%d\n&quot;, j);
-        for (int i = 0; i &lt; 8; i++)
-        &#123;
-            if (bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]] == 255 &amp;&amp; bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]] == 0)
-            &#123;
-                // printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]]);
-                // printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]]);
-                growth_direction_left[growth_count_left] = i;
-                growth_count_left++;
-                start_point_l[0] = start_point_l[0] + neighbor_left[i+1][0];
-                start_point_l[1] = start_point_l[1] + neighbor_left[i+1][1];
-                border_location_left[border_count_left][0] = start_point_l[0];
-                border_location_left[border_count_left][1] = start_point_l[1];
-                border_count_left++;
-                // printf(&quot;New Left Start Point: %d, %d\n&quot;, start_point_l[0], start_point_l[1]);
-                // printf(&quot;finished\n&quot;);
-                // printf(&quot;%d\n&quot;, j);
-                break;
-            &#125;
-        &#125;
-        //右边界部分
-        /*
-            [0/8]  [1]  [2]
-
-            [7]  [ ]  [3]
-
-            [6]  [5]  [4]
-        */
-        for (int i = 0; i &lt; 8; i++)
-        &#123;
-            if (bin_image[start_point_r[0] + neighbor_right[i][0]][start_point_r[1] + neighbor_right[i][1]] == 255  &amp;&amp; (bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] == 0 || bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] == 151))
-            &#123;
-                growth_direction_right[growth_count_right] = i;
-                growth_count_right++;
-
-                border_location_right[border_count_right][0] = start_point_r[0] + neighbor_right[i+1][0];
-                border_location_right[border_count_right][1] = start_point_r[1] + neighbor_right[i+1][1];
-                // bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] = 151;
-                start_point_r[0] = start_point_r[0] + neighbor_right[i+1][0];
-                start_point_r[1] = start_point_r[1] + neighbor_right[i+1][1];
-                border_count_right++;
-                break;
-            &#125;
-        &#125;
-        //当两线交汇时停止搜线
-        if ((j != 0 &amp;&amp; j != border_length-1) &amp;&amp; 
-        ((border_location_left[j][0] == border_location_right[j][0] &amp;&amp; border_location_left[j][1] == border_location_right[j][1])
-        || (border_location_left[j+1][0] == border_location_right[j-1][0] &amp;&amp; border_location_left[j+1][1] == border_location_right[j-1][1])
-        || (border_location_left[j-1][0] == border_location_right[j+1][0] &amp;&amp; border_location_left[j-1][1] == border_location_right[j+1][1])))
-        &#123;
-            break;
-        &#125;
-    &#125;
-&#125;```
-
-在右圆环的八邻域中，不需要记录下每一个黑点的位置，因为我们只需要圆环最左侧点的位置。
-
-与上面相同，每一个起点我们都需要至多扫描八次，把周围点都扫描一遍以检查突变。如果扫描到突变点，直接退出当前的循环，记录并开始下一次循环。每次循环结束后检查爬取到的点是否在原起点的右侧，如果是，则退出循环。
-
-
-出问题的原因也找出来了，我将一部分的点标记为了152，而我在找八邻域时的条件为从255到0，这使程序在找八邻域时如果遇到了被我标记为152的点，程序将一直在那里循环，将标记解除后恢复了正常。
-</code></pre>
+<p>在右圆环的八邻域中，不需要记录下每一个黑点的位置，因为我们只需要圆环最左侧点的位置。</p>
+<p>与上面相同，每一个起点我们都需要至多扫描八次，把周围点都扫描一遍以检查突变。如果扫描到突变点，直接退出当前的循环，记录并开始下一次循环。每次循环结束后检查爬取到的点是否在原起点的右侧，如果是，则退出循环。</p>
+<p>出问题的原因也找出来了，我将一部分的点标记为了152，而我在找八邻域时的条件为从255到0，这使程序在找八邻域时如果遇到了被我标记为152的点，程序将一直在那里循环，将标记解除后恢复了正常。</p>
 
     </div>
     
