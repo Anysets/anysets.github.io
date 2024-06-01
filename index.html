@@ -139,6 +139,111 @@
         
 
 <div class="post">
+    <a href="/2024/06/01/AR-Linux%E7%AC%94%E8%AE%B0/">
+        <h2 class="post-title">AR Linux笔记</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/6/1
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h3 id="Linux的3种网络模式"><a href="#Linux的3种网络模式" class="headerlink" title="Linux的3种网络模式"></a>Linux的3种网络模式</h3><h5 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h5><p>桥接模式下，主机可以通过虚拟网桥与虚拟机建立联系，虚拟机、主机共用同一个网关，他们相互之间能直接ping通。</p>
+<h5 id="NAT模式"><a href="#NAT模式" class="headerlink" title="NAT模式"></a>NAT模式</h5><p>虚拟机控制软件可以虚拟出一个网关出来，虚拟机之间可以进行通信，主机和虚拟机需要通过虚拟网络适配器进行通信。此模式下虚拟机可以与外界网络通信，也可以与主机通讯，但外界网络上的设备无法与虚拟机通信。</p>
+<h5 id="主机模式"><a href="#主机模式" class="headerlink" title="主机模式"></a>主机模式</h5><p>虚拟机控制软件可以虚拟出一个网关出来，虚拟机之间可以进行通信，主机和虚拟机需要通过虚拟网络适配器进行通信。此模式下虚拟机只可以与主机通讯，无法与外界网络通信，外界网络上的设备也无法与虚拟机通信。</p>
+<h3 id="Linux目录结构"><a href="#Linux目录结构" class="headerlink" title="Linux目录结构"></a>Linux目录结构</h3><pre><code>/bin：存放基本用户命令的二进制文件，如 ls、cp、mv 等。系统引导过程中需要用到的命令也在这里。
+
+/boot：存放引导加载器相关的文件，包括内核镜像和启动配置文件，如 vmlinuz、initrd.img 和 grub 目录。
+
+/dev：存放设备文件，每个文件都代表一个硬件设备或虚拟设备，如硬盘、光驱、终端等。
+
+/etc：存放系统级配置文件和子目录，如网络配置文件、服务配置文件等。例如，/etc/passwd 存储用户账户信息，/etc/fstab 存储文件系统挂载信息。
+
+/home：存放用户的主目录，每个用户都有一个对应的子目录。用户的个人数据、配置文件等都存放在这里。
+
+/lib：存放基本系统程序使用的共享库文件和内核模块。包括 /lib、/lib32 和 /lib64 目录，根据系统架构不同而有所区别。
+
+/media：挂载可移动媒体设备的挂载点，如光盘、U盘等。
+
+/mnt：临时挂载文件系统的挂载点，用于管理员手动挂载临时文件系统。
+
+/opt：用于安装附加软件包。第三方软件通常会安装在这个目录中，以便与系统默认的文件分开管理。
+
+/proc：一个虚拟文件系统，提供系统内核和进程信息。这个目录中的文件和子目录并不实际存在于磁盘上，而是由内核动态生成。
+
+/root：超级用户（root 用户）的主目录，与普通用户的主目录在 /home 不同。
+
+/run：存放系统运行时产生的临时文件和信息，如系统进程 ID（PID）文件、socket 文件等。
+
+/sbin：存放系统管理员使用的二进制文件，如系统引导和修复程序。普通用户一般没有执行这些命令的权限。
+
+/srv：存放由系统提供的服务的数据，如网页服务器提供的网页内容。
+
+/sys：一个虚拟文件系统，提供设备和内核模块的信息和配置接口。
+
+/tmp：存放临时文件，系统启动时可以删除这里的文件。通常用于程序运行时临时存储数据。
+
+/usr：存放用户程序和数据，包含多个子目录：
+    /usr/bin：大多数用户命令的二进制文件。
+    /usr/sbin：非基本系统管理命令。
+    /usr/lib：为 /usr/bin 和 /usr/sbin 中的程序提供的库文件。
+    /usr/local：用于本地安装的软件和数据。
+    /usr/share：架构无关的共享数据。
+
+/var：存放经常变化的数据，如日志文件（/var/log）、邮件（/var/mail）、打印机临时文件（/var/spool）、锁文件（/var/lock）和缓存文件（/var/cache）。
+</code></pre>
+<h3 id="Linux用户"><a href="#Linux用户" class="headerlink" title="Linux用户"></a>Linux用户</h3><h5 id="添加用户：useradd-选项-参数"><a href="#添加用户：useradd-选项-参数" class="headerlink" title="添加用户：useradd -选项 参数"></a>添加用户：<code>useradd -选项 参数</code></h5><p>-d 指定家目录</p>
+<p>-e 指定账户到期时间</p>
+<p>-u 指定UID</p>
+<p>-g 指定基本用户组</p>
+<p>-G 指定扩展用户组</p>
+<p>-N 不创建用户同名用户组</p>
+<p>-s 指定默认shell</p>
+<h5 id="修改用户：usermod-选项-参数"><a href="#修改用户：usermod-选项-参数" class="headerlink" title="修改用户：usermod -选项 参数"></a>修改用户：<code>usermod -选项 参数</code></h5><p>-c 修改备注</p>
+<p>-d 修改登入目录</p>
+<p>-e 修改有效期限</p>
+<p>-f 修改密码过期后多久关闭该账号</p>
+<p>-g 修改用户组</p>
+<p>-G 修改附加群组</p>
+<p>-l 修改账户名</p>
+<p>-L 锁定用户</p>
+<p>-U 解锁用户</p>
+<p>-u 修改UID</p>
+<p>-s 修改默认shell</p>
+<h5 id="修改用户密码：passwd"><a href="#修改用户密码：passwd" class="headerlink" title="修改用户密码：passwd"></a>修改用户密码：<code>passwd</code></h5><h3 id="Linux文件基本属性"><a href="#Linux文件基本属性" class="headerlink" title="Linux文件基本属性"></a>Linux文件基本属性</h3><p><code>ls -a</code> 显示当前目录所有文件</p>
+<p><code>ls -l</code> 以列表形式显示当前目录的文件</p>
+<h3 id="Linux文件权限"><a href="#Linux文件权限" class="headerlink" title="Linux文件权限"></a>Linux文件权限</h3><p>在执行完<code>ls -l</code>后最左侧一列会显示文件的权限，这里给出一个文件的实例：<br><code>-rw-r--r--</code></p>
+<p>其中第1位是文件类型，<code>-</code>是普通文件。</p>
+<p>第2-4位是文件的属主权限，第5-7位是文件的属组权限，第8-10位是文件的其他用户权限</p>
+<p>每3位为一个单位，分别表示 r：读权限、 w：写权限、 x：运行权限</p>
+<h3 id="对Linux文件权限进行操作"><a href="#对Linux文件权限进行操作" class="headerlink" title="对Linux文件权限进行操作"></a>对Linux文件权限进行操作</h3><p><code>chgrp</code>：改变文件所属群组<br><code>chown</code>：改变文件所有人<br><code>chmod</code>：改变文件属性</p>
+<p>chmod 可以说是相当常用，有时候从网络上下载的脚本并不能直接执行，会提示没有权限，此时执行一句<code>chmod a+x 文件名</code>即可正常执行文件。</p>
+<p>除此之外还有一种数字设定法，r为4，w为2，x为1</p>
+<p>此时执行<code>chmod 777 文件名</code>即可给文件最高的权限，当然这样做是不可取的，一般需要这样设定时，给出755的权限即可。</p>
+<h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><p>Linux（当然不只是Linux）下有绝对路径和相对路径之分</p>
+<p>绝对路径就是从根目录<code>/</code>开始一直到目标文件的路径，比如<code>/home/anysets/.bashrc</code>。</p>
+<p>相对路径有很多种，比如最常用的<code>~</code>代指的即为家目录，上面的文件使用相对路径可以表示为<code>~/.bashrc</code>。一般在写脚本时，我们并不能完全确定用户的绝对路径是什么，多使用相对路径。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2024/06/01/AR-Linux%E7%AC%94%E8%AE%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/05/27/%E5%8F%B3%E7%8E%AF%E5%B2%9B%E7%8A%B6%E6%80%81%E6%9C%BA%E8%AE%BE%E8%AE%A1/">
         <h2 class="post-title">右环岛状态机设计</h2>
     </a>
@@ -213,105 +318,11 @@
             <p>原先的八邻域已经写好了，最近在写右圆环时又遇到了八邻域，但是逻辑似乎有些混乱，在此再次记录下八邻域的思路。</p>
 <p>八邻域需要在一个固定起点处以一个顺时针或者逆时针的顺序对周围的点进行扫描。在我的程序中，如果在扫描的过程中发现一个白点突变为黑点，则说明找到了新的黑线。此时记录下这个黑点的位置，并将其作为下一个起点，如此往复，直到爬出完整的边界。</p>
 <p>以下是在爬取赛道时的八邻域代码：</p>
-<pre><code class="cpp">//记录左边界的数据
-int32_t border_location_left[border_length][2];  //记录边界位置
-int32_t border_count_left = 0;
-int32_t growth_direction_left[border_length];  //记录生长方向
-int32_t growth_count_left = 0;
-//记录右边界的数据
-int32_t border_location_right[border_length][2];  //记录边界位置
-int32_t border_count_right = 0;
-int32_t growth_direction_right[border_length];  //记录生长方向
-int32_t growth_count_right = 0;
-void neighborSearch()
-&#123;
-    memset(border_location_left, 0, sizeof(border_location_left));
-    memset(border_location_right, 0, sizeof(border_location_right));
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//记录左边界的数据</span></span><br><span class="line"><span class="type">int32_t</span> border_location_left[border_length][<span class="number">2</span>];  <span class="comment">//记录边界位置</span></span><br><span class="line"><span class="type">int32_t</span> border_count_left = <span class="number">0</span>;</span><br><span class="line"><span class="type">int32_t</span> growth_direction_left[border_length];  <span class="comment">//记录生长方向</span></span><br><span class="line"><span class="type">int32_t</span> growth_count_left = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//记录右边界的数据</span></span><br><span class="line"><span class="type">int32_t</span> border_location_right[border_length][<span class="number">2</span>];  <span class="comment">//记录边界位置</span></span><br><span class="line"><span class="type">int32_t</span> border_count_right = <span class="number">0</span>;</span><br><span class="line"><span class="type">int32_t</span> growth_direction_right[border_length];  <span class="comment">//记录生长方向</span></span><br><span class="line"><span class="type">int32_t</span> growth_count_right = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">neighborSearch</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(border_location_left, <span class="number">0</span>, <span class="built_in">sizeof</span>(border_location_left));</span><br><span class="line">    <span class="built_in">memset</span>(border_location_right, <span class="number">0</span>, <span class="built_in">sizeof</span>(border_location_right));</span><br><span class="line"></span><br><span class="line">    <span class="type">int32_t</span> neighbor_left[<span class="number">9</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line">    <span class="type">int32_t</span> neighbor_right[<span class="number">9</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">    border_count_left = <span class="number">1</span>;</span><br><span class="line">    growth_count_left = <span class="number">1</span>;</span><br><span class="line">    border_count_right = <span class="number">1</span>;</span><br><span class="line">    growth_count_right = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//把起点加进去</span></span><br><span class="line">    border_location_left[<span class="number">0</span>][<span class="number">0</span>] = start_point_l[<span class="number">0</span>];</span><br><span class="line">    border_location_left[<span class="number">0</span>][<span class="number">1</span>] = start_point_l[<span class="number">1</span>];</span><br><span class="line">    border_location_right[<span class="number">0</span>][<span class="number">0</span>] = start_point_r[<span class="number">0</span>];</span><br><span class="line">    border_location_right[<span class="number">0</span>][<span class="number">1</span>] = start_point_r[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; border_length<span class="number">-1</span>; j++)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="comment">//左边界部分</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            [2]  [1]  [0/8]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">            [3]  [ ]  [7]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">            [4]  [5]  [6]</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="comment">// printf(&quot;%d\n&quot;, j);</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (bin_image[start_point_l[<span class="number">0</span>] + neighbor_left[i][<span class="number">0</span>]][start_point_l[<span class="number">1</span>] + neighbor_left[i][<span class="number">1</span>]] == <span class="number">255</span> &amp;&amp; bin_image[start_point_l[<span class="number">0</span>] + neighbor_left[i+<span class="number">1</span>][<span class="number">0</span>]][start_point_l[<span class="number">1</span>] + neighbor_left[i+<span class="number">1</span>][<span class="number">1</span>]] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]]);</span></span><br><span class="line">                <span class="comment">// printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]]);</span></span><br><span class="line">                growth_direction_left[growth_count_left] = i;</span><br><span class="line">				growth_count_left++;</span><br><span class="line">                start_point_l[<span class="number">0</span>] = start_point_l[<span class="number">0</span>] + neighbor_left[i+<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">                start_point_l[<span class="number">1</span>] = start_point_l[<span class="number">1</span>] + neighbor_left[i+<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">                border_location_left[border_count_left][<span class="number">0</span>] = start_point_l[<span class="number">0</span>];</span><br><span class="line">                border_location_left[border_count_left][<span class="number">1</span>] = start_point_l[<span class="number">1</span>];</span><br><span class="line">                border_count_left++;</span><br><span class="line">				<span class="comment">// printf(&quot;New Left Start Point: %d, %d\n&quot;, start_point_l[0], start_point_l[1]);</span></span><br><span class="line">                <span class="comment">// printf(&quot;finished\n&quot;);</span></span><br><span class="line">				<span class="comment">// printf(&quot;%d\n&quot;, j);</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//右边界部分</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            [0/8]  [1]  [2]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">            [7]  [ ]  [3]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">            [6]  [5]  [4]</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (bin_image[start_point_r[<span class="number">0</span>] + neighbor_right[i][<span class="number">0</span>]][start_point_r[<span class="number">1</span>] + neighbor_right[i][<span class="number">1</span>]] == <span class="number">255</span>  &amp;&amp; (bin_image[start_point_r[<span class="number">0</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">0</span>]][start_point_r[<span class="number">1</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">1</span>]] == <span class="number">0</span> || bin_image[start_point_r[<span class="number">0</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">0</span>]][start_point_r[<span class="number">1</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">1</span>]] == <span class="number">151</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                growth_direction_right[growth_count_right] = i;</span><br><span class="line">				growth_count_right++;</span><br><span class="line"></span><br><span class="line">                border_location_right[border_count_right][<span class="number">0</span>] = start_point_r[<span class="number">0</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">                border_location_right[border_count_right][<span class="number">1</span>] = start_point_r[<span class="number">1</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">				<span class="comment">// bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] = 151;</span></span><br><span class="line">                start_point_r[<span class="number">0</span>] = start_point_r[<span class="number">0</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">                start_point_r[<span class="number">1</span>] = start_point_r[<span class="number">1</span>] + neighbor_right[i+<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">				border_count_right++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当两线交汇时停止搜线</span></span><br><span class="line">        <span class="keyword">if</span> ((j != <span class="number">0</span> &amp;&amp; j != border_length<span class="number">-1</span>) &amp;&amp; </span><br><span class="line">        ((border_location_left[j][<span class="number">0</span>] == border_location_right[j][<span class="number">0</span>] &amp;&amp; border_location_left[j][<span class="number">1</span>] == border_location_right[j][<span class="number">1</span>])</span><br><span class="line">        || (border_location_left[j+<span class="number">1</span>][<span class="number">0</span>] == border_location_right[j<span class="number">-1</span>][<span class="number">0</span>] &amp;&amp; border_location_left[j+<span class="number">1</span>][<span class="number">1</span>] == border_location_right[j<span class="number">-1</span>][<span class="number">1</span>])</span><br><span class="line">        || (border_location_left[j<span class="number">-1</span>][<span class="number">0</span>] == border_location_right[j+<span class="number">1</span>][<span class="number">0</span>] &amp;&amp; border_location_left[j<span class="number">-1</span>][<span class="number">1</span>] == border_location_right[j+<span class="number">1</span>][<span class="number">1</span>])))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    int32_t neighbor_left[9][2] = &#123;&#123;-1, 1&#125;, &#123;-1, 0&#125;, &#123;-1, -1&#125;, &#123;0, -1&#125;, &#123;1, -1&#125;, &#123;1, 0&#125;, &#123;1, 1&#125;, &#123;0, 1&#125;, &#123;-1, 1&#125;&#125;;
-    int32_t neighbor_right[9][2] = &#123;&#123;-1, -1&#125;, &#123;-1, 0&#125;, &#123;-1, 1&#125;, &#123;0, 1&#125;, &#123;1, 1&#125;, &#123;1, 0&#125;, &#123;1, -1&#125;, &#123;0, -1&#125;, &#123;-1, -1&#125;&#125;;
-    border_count_left = 1;
-    growth_count_left = 1;
-    border_count_right = 1;
-    growth_count_right = 1;
-    //把起点加进去
-    border_location_left[0][0] = start_point_l[0];
-    border_location_left[0][1] = start_point_l[1];
-    border_location_right[0][0] = start_point_r[0];
-    border_location_right[0][1] = start_point_r[1];
-    for (int j = 0; j &lt; border_length-1; j++)
-    &#123;
-        //左边界部分
-        /*
-            [2]  [1]  [0/8]
-
-            [3]  [ ]  [7]
-
-            [4]  [5]  [6]
-        */
-        // printf(&quot;%d\n&quot;, j);
-        for (int i = 0; i &lt; 8; i++)
-        &#123;
-            if (bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]] == 255 &amp;&amp; bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]] == 0)
-            &#123;
-                // printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i][0]][start_point_l[1] + neighbor_left[i][1]]);
-                // printf(&quot;h=%d\n&quot;, bin_image[start_point_l[0] + neighbor_left[i+1][0]][start_point_l[1] + neighbor_left[i+1][1]]);
-                growth_direction_left[growth_count_left] = i;
-                growth_count_left++;
-                start_point_l[0] = start_point_l[0] + neighbor_left[i+1][0];
-                start_point_l[1] = start_point_l[1] + neighbor_left[i+1][1];
-                border_location_left[border_count_left][0] = start_point_l[0];
-                border_location_left[border_count_left][1] = start_point_l[1];
-                border_count_left++;
-                // printf(&quot;New Left Start Point: %d, %d\n&quot;, start_point_l[0], start_point_l[1]);
-                // printf(&quot;finished\n&quot;);
-                // printf(&quot;%d\n&quot;, j);
-                break;
-            &#125;
-        &#125;
-        //右边界部分
-        /*
-            [0/8]  [1]  [2]
-
-            [7]  [ ]  [3]
-
-            [6]  [5]  [4]
-        */
-        for (int i = 0; i &lt; 8; i++)
-        &#123;
-            if (bin_image[start_point_r[0] + neighbor_right[i][0]][start_point_r[1] + neighbor_right[i][1]] == 255  &amp;&amp; (bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] == 0 || bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] == 151))
-            &#123;
-                growth_direction_right[growth_count_right] = i;
-                growth_count_right++;
-
-                border_location_right[border_count_right][0] = start_point_r[0] + neighbor_right[i+1][0];
-                border_location_right[border_count_right][1] = start_point_r[1] + neighbor_right[i+1][1];
-                // bin_image[start_point_r[0] + neighbor_right[i+1][0]][start_point_r[1] + neighbor_right[i+1][1]] = 151;
-                start_point_r[0] = start_point_r[0] + neighbor_right[i+1][0];
-                start_point_r[1] = start_point_r[1] + neighbor_right[i+1][1];
-                border_count_right++;
-                break;
-            &#125;
-        &#125;
-        //当两线交汇时停止搜线
-        if ((j != 0 &amp;&amp; j != border_length-1) &amp;&amp; 
-        ((border_location_left[j][0] == border_location_right[j][0] &amp;&amp; border_location_left[j][1] == border_location_right[j][1])
-        || (border_location_left[j+1][0] == border_location_right[j-1][0] &amp;&amp; border_location_left[j+1][1] == border_location_right[j-1][1])
-        || (border_location_left[j-1][0] == border_location_right[j+1][0] &amp;&amp; border_location_left[j-1][1] == border_location_right[j+1][1])))
-        &#123;
-            break;
-        &#125;
-    &#125;
-&#125;
-
-
-在右圆环的八邻域中，不需要记录下每一个黑点的位置，因为我们只需要圆环最左侧点的位置。
-
-与上面相同，每一个起点我们都需要至多扫描八次，把周围点都扫描一遍以检查突变。如果扫描到突变点，直接退出当前的循环，记录并开始下一次循环。每次循环结束后检查爬取到的点是否在原起点的右侧，如果是，则退出循环。
-
-
-出问题的原因也找出来了，我将一部分的点标记为了152，而我在找八邻域时的条件为从255到0，这使程序在找八邻域时如果遇到了被我标记为152的点，程序将一直在那里循环，将标记解除后恢复了正常。
-</code></pre>
+<p>在右圆环的八邻域中，不需要记录下每一个黑点的位置，因为我们只需要圆环最左侧点的位置。</p>
+<p>与上面相同，每一个起点我们都需要至多扫描八次，把周围点都扫描一遍以检查突变。如果扫描到突变点，直接退出当前的循环，记录并开始下一次循环。每次循环结束后检查爬取到的点是否在原起点的右侧，如果是，则退出循环。</p>
+<p>出问题的原因也找出来了，我将一部分的点标记为了152，而我在找八邻域时的条件为从255到0，这使程序在找八邻域时如果遇到了被我标记为152的点，程序将一直在那里循环，将标记解除后恢复了正常。</p>
 
             
         </div>

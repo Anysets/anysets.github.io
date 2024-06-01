@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>AR Linux笔记 | Anysets</title>
+    <meta name="author" content="Anysets" />
+    <meta name="description" content="Anysets" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>ANYSETS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;ANYSETS</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>AR Linux笔记</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/6/1
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h3 id="Linux的3种网络模式"><a href="#Linux的3种网络模式" class="headerlink" title="Linux的3种网络模式"></a>Linux的3种网络模式</h3><h5 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h5><p>桥接模式下，主机可以通过虚拟网桥与虚拟机建立联系，虚拟机、主机共用同一个网关，他们相互之间能直接ping通。</p>
+<h5 id="NAT模式"><a href="#NAT模式" class="headerlink" title="NAT模式"></a>NAT模式</h5><p>虚拟机控制软件可以虚拟出一个网关出来，虚拟机之间可以进行通信，主机和虚拟机需要通过虚拟网络适配器进行通信。此模式下虚拟机可以与外界网络通信，也可以与主机通讯，但外界网络上的设备无法与虚拟机通信。</p>
+<h5 id="主机模式"><a href="#主机模式" class="headerlink" title="主机模式"></a>主机模式</h5><p>虚拟机控制软件可以虚拟出一个网关出来，虚拟机之间可以进行通信，主机和虚拟机需要通过虚拟网络适配器进行通信。此模式下虚拟机只可以与主机通讯，无法与外界网络通信，外界网络上的设备也无法与虚拟机通信。</p>
+<h3 id="Linux目录结构"><a href="#Linux目录结构" class="headerlink" title="Linux目录结构"></a>Linux目录结构</h3><pre><code>/bin：存放基本用户命令的二进制文件，如 ls、cp、mv 等。系统引导过程中需要用到的命令也在这里。
+
+/boot：存放引导加载器相关的文件，包括内核镜像和启动配置文件，如 vmlinuz、initrd.img 和 grub 目录。
+
+/dev：存放设备文件，每个文件都代表一个硬件设备或虚拟设备，如硬盘、光驱、终端等。
+
+/etc：存放系统级配置文件和子目录，如网络配置文件、服务配置文件等。例如，/etc/passwd 存储用户账户信息，/etc/fstab 存储文件系统挂载信息。
+
+/home：存放用户的主目录，每个用户都有一个对应的子目录。用户的个人数据、配置文件等都存放在这里。
+
+/lib：存放基本系统程序使用的共享库文件和内核模块。包括 /lib、/lib32 和 /lib64 目录，根据系统架构不同而有所区别。
+
+/media：挂载可移动媒体设备的挂载点，如光盘、U盘等。
+
+/mnt：临时挂载文件系统的挂载点，用于管理员手动挂载临时文件系统。
+
+/opt：用于安装附加软件包。第三方软件通常会安装在这个目录中，以便与系统默认的文件分开管理。
+
+/proc：一个虚拟文件系统，提供系统内核和进程信息。这个目录中的文件和子目录并不实际存在于磁盘上，而是由内核动态生成。
+
+/root：超级用户（root 用户）的主目录，与普通用户的主目录在 /home 不同。
+
+/run：存放系统运行时产生的临时文件和信息，如系统进程 ID（PID）文件、socket 文件等。
+
+/sbin：存放系统管理员使用的二进制文件，如系统引导和修复程序。普通用户一般没有执行这些命令的权限。
+
+/srv：存放由系统提供的服务的数据，如网页服务器提供的网页内容。
+
+/sys：一个虚拟文件系统，提供设备和内核模块的信息和配置接口。
+
+/tmp：存放临时文件，系统启动时可以删除这里的文件。通常用于程序运行时临时存储数据。
+
+/usr：存放用户程序和数据，包含多个子目录：
+    /usr/bin：大多数用户命令的二进制文件。
+    /usr/sbin：非基本系统管理命令。
+    /usr/lib：为 /usr/bin 和 /usr/sbin 中的程序提供的库文件。
+    /usr/local：用于本地安装的软件和数据。
+    /usr/share：架构无关的共享数据。
+
+/var：存放经常变化的数据，如日志文件（/var/log）、邮件（/var/mail）、打印机临时文件（/var/spool）、锁文件（/var/lock）和缓存文件（/var/cache）。
+</code></pre>
+<h3 id="Linux用户"><a href="#Linux用户" class="headerlink" title="Linux用户"></a>Linux用户</h3><h5 id="添加用户：useradd-选项-参数"><a href="#添加用户：useradd-选项-参数" class="headerlink" title="添加用户：useradd -选项 参数"></a>添加用户：<code>useradd -选项 参数</code></h5><p>-d 指定家目录</p>
+<p>-e 指定账户到期时间</p>
+<p>-u 指定UID</p>
+<p>-g 指定基本用户组</p>
+<p>-G 指定扩展用户组</p>
+<p>-N 不创建用户同名用户组</p>
+<p>-s 指定默认shell</p>
+<h5 id="修改用户：usermod-选项-参数"><a href="#修改用户：usermod-选项-参数" class="headerlink" title="修改用户：usermod -选项 参数"></a>修改用户：<code>usermod -选项 参数</code></h5><p>-c 修改备注</p>
+<p>-d 修改登入目录</p>
+<p>-e 修改有效期限</p>
+<p>-f 修改密码过期后多久关闭该账号</p>
+<p>-g 修改用户组</p>
+<p>-G 修改附加群组</p>
+<p>-l 修改账户名</p>
+<p>-L 锁定用户</p>
+<p>-U 解锁用户</p>
+<p>-u 修改UID</p>
+<p>-s 修改默认shell</p>
+<h5 id="修改用户密码：passwd"><a href="#修改用户密码：passwd" class="headerlink" title="修改用户密码：passwd"></a>修改用户密码：<code>passwd</code></h5><h3 id="Linux文件基本属性"><a href="#Linux文件基本属性" class="headerlink" title="Linux文件基本属性"></a>Linux文件基本属性</h3><p><code>ls -a</code> 显示当前目录所有文件</p>
+<p><code>ls -l</code> 以列表形式显示当前目录的文件</p>
+<h3 id="Linux文件权限"><a href="#Linux文件权限" class="headerlink" title="Linux文件权限"></a>Linux文件权限</h3><p>在执行完<code>ls -l</code>后最左侧一列会显示文件的权限，这里给出一个文件的实例：<br><code>-rw-r--r--</code></p>
+<p>其中第1位是文件类型，<code>-</code>是普通文件。</p>
+<p>第2-4位是文件的属主权限，第5-7位是文件的属组权限，第8-10位是文件的其他用户权限</p>
+<p>每3位为一个单位，分别表示 r：读权限、 w：写权限、 x：运行权限</p>
+<h3 id="对Linux文件权限进行操作"><a href="#对Linux文件权限进行操作" class="headerlink" title="对Linux文件权限进行操作"></a>对Linux文件权限进行操作</h3><p><code>chgrp</code>：改变文件所属群组<br><code>chown</code>：改变文件所有人<br><code>chmod</code>：改变文件属性</p>
+<p>chmod 可以说是相当常用，有时候从网络上下载的脚本并不能直接执行，会提示没有权限，此时执行一句<code>chmod a+x 文件名</code>即可正常执行文件。</p>
+<p>除此之外还有一种数字设定法，r为4，w为2，x为1</p>
+<p>此时执行<code>chmod 777 文件名</code>即可给文件最高的权限，当然这样做是不可取的，一般需要这样设定时，给出755的权限即可。</p>
+<h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><p>Linux（当然不只是Linux）下有绝对路径和相对路径之分</p>
+<p>绝对路径就是从根目录<code>/</code>开始一直到目标文件的路径，比如<code>/home/anysets/.bashrc</code>。</p>
+<p>相对路径有很多种，比如最常用的<code>~</code>代指的即为家目录，上面的文件使用相对路径可以表示为<code>~/.bashrc</code>。一般在写脚本时，我们并不能完全确定用户的绝对路径是什么，多使用相对路径。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2024 - 2024 Anysets
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Anysets
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
