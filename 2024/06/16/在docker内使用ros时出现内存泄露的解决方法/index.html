@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | Anysets</title>
+    <title>在docker内使用ros时出现内存溢出的解决方法 | Anysets</title>
     <meta name="author" content="Anysets" />
     <meta name="description" content="Anysets" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -108,82 +112,35 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>在docker内使用ros时出现内存溢出的解决方法</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/6/16
+        </span>
         
-        <div class="timeline" data-title="这把是真的helloworld了">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/5/19</div>
-                <a href="/2024/05/19/%E8%BF%99%E6%8A%8A%E6%98%AF%E7%9C%9F%E7%9A%84hello-world%E4%BA%86/">
-                    <h3>这把是真的hello world了</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="八邻域巡线">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/5/22</div>
-                <a href="/2024/05/22/%E5%85%AB%E9%82%BB%E5%9F%9F%E5%B7%A1%E7%BA%BF/">
-                    <h3>八邻域巡线</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="右环岛状态机设计">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/5/27</div>
-                <a href="/2024/05/27/%E5%8F%B3%E7%8E%AF%E5%B2%9B%E7%8A%B6%E6%80%81%E6%9C%BA%E8%AE%BE%E8%AE%A1/">
-                    <h3>右环岛状态机设计</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="arlinux笔记">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/6/1</div>
-                <a href="/2024/06/01/AR-Linux%E7%AC%94%E8%AE%B0/">
-                    <h3>AR Linux笔记</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="在docker内使用ros时出现内存溢出的解决方法">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/6/16</div>
-                <a href="/2024/06/16/%E5%9C%A8docker%E5%86%85%E4%BD%BF%E7%94%A8ros%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
-                    <h3>在docker内使用ros时出现内存溢出的解决方法</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <p>使用鱼香ros的一键安装脚本成功安装了docker版本的ros，但是在启动了小乌龟节点和键盘控制节点后内存被完全塞满，宿主机完全卡死。考虑到ros甚至可以在2gb的树莓派上运行，而我的主机有16gb内存，应该是出现了一些错误。</p>
+<p>在互联网上不懈地冲浪后终于找到了解决方法，执行以下命令即可解决：</p>
+<p><code>ulimit -Hn 524288 &amp;&amp; ulimit -Sn 524288</code></p>
+<p>原帖：<a target="_blank" rel="noopener" href="https://answers.ros.org/question/336963/rosout-high-memory-usage/">https://answers.ros.org/question/336963/rosout-high-memory-usage/</a></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -214,6 +171,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
